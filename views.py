@@ -10,7 +10,7 @@ from whatsapp_api import (
     is_valid_whatsapp_message, 
     process_whatsapp_message
 )
-from ai_bot_2 import AIBot
+from ai_bot_langchain import AIBot
 
 webhook_blueprint = Blueprint("webhook", __name__)
 

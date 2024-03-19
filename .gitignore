@@ -35,6 +35,8 @@ bld/
 # Files to exclude
 config.py
 test_whatsapps.py
+.env
+
 
 
 

@@ -3,7 +3,8 @@ import logging
 
 from views import webhook_blueprint
 from config import Config
-from ai_bot_2 import AIBot
+# from ai_bot_2 import AIBot
+from ai_bot_langchain import AIBot
 
 
 def create_app():

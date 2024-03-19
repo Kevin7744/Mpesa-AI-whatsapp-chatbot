@@ -104,9 +104,9 @@ def process_whatsapp_message(body):
     message_body = message["text"]["body"]
     
     #use AI chatbot to generate the response to the user
-    resp = app.bot_instance.handle_message(message_body)
+    # resp = app.bot_instance.handle_message(message_body)
     
-    # resp = message_body + '-> resp'
+    resp = message_body + '-> resp'
     #send the response back to the user
     msg_payload = create_text_message(user_waid, resp)
     send_message(msg_payload)

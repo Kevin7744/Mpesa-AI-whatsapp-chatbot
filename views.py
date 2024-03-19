@@ -10,7 +10,7 @@ from whatsapp_api import (
     is_valid_whatsapp_message, 
     process_whatsapp_message
 )
-from ai_bot import AIBot
+from ai_bot_2 import AIBot
 
 webhook_blueprint = Blueprint("webhook", __name__)
 
@@ -80,12 +80,12 @@ def verify():
 #attach functions to webhook blueprint
 #explanation of flask blueprints: https://realpython.com/flask-blueprint/#:~:text=Each%20Flask%20Blueprint%20is%20an,before%20you%20can%20run%20it.
 #(blueprints are a simple feature to embelish code)
-@webhook_blueprint.route('/webhook', methods=['GET'])
+@webhook_blueprint.route('/webhooks', methods=['GET'])
 def webhook_get():
     return verify()
 
 
-@webhook_blueprint.route('/webhook', methods=['POST'])
+@webhook_blueprint.route('/webhooks', methods=['POST'])
 @signature_required
 def webhook_post():
     return handle_message()

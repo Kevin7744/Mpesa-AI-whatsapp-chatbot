@@ -77,7 +77,7 @@ def send_message(data):
                                  data=data, 
                                  headers=headers, 
                                  timeout=20) #timeout after 20 seconds without reply from server
-        response.raise_for_status() #raises exception if HTTP request is not successfu
+        response.raise_for_status() #raises exception if HTTP request is not successful
     except requests.Timeout:
         logging.error('Timeout occurred while sending message')
         return {'status': 'error', 'message': 'Request timed out'}

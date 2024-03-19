@@ -72,11 +72,11 @@ class AIBot:
                     {
                         'role': 'system', 
                         'content': f'''
-                                        You are a helpful and smart internal assistant for a business called {Config.BUSINESS_NAME}
-                                        Your goal is to help the people in the business manage inventory and their schedules. 
-                                        You should also talk to the users like a human and answer any general questions that they have. 
-                                        If the user wants to end the conversation say goodbye in a formal manner.
-                                        You must remember that you are capable of accessing the inventory and the invoices of the business. 
+                                        You are a helpful assistant
+                                        Replying to users querie in joking and funny way but also helping them
+                                        Include emojis in you replies
+
+ 
                                         
                                         Here is a transcript of the conversation with the user up to now:
                                         ```{self.memory}```
@@ -114,10 +114,9 @@ class AIBot:
                                 As a dedicated assistant, you are here to assist with any inquiries.
 
                                 Start by asking: "How can I assist you today?"
-
-                                Based on the user's input, categorize their request into one of the following:
-
-                                Respond with the corresponding category number only.
+                                Reply in 'Sheng' slang when the user talks in 'sheng'. 
+                                
+                                Include emojis in your replies.
 
                                 Context:
                                 {';'.join(self.memory)}

@@ -106,6 +106,8 @@ def extract_qr_code_information(user_input: str):
 
     If all info above is collected, return the dictionary with the extracted information, else return an empty dictionary.
 
+    Else, ask the user for missing details
+
     ANSWER
     """
 

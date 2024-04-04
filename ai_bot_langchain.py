@@ -1,18 +1,22 @@
 import os
 from dotenv import load_dotenv
+
 from langchain.agents import initialize_agent, AgentType
 from langchain_openai import ChatOpenAI
 from langchain.schema import SystemMessage
 from langchain.prompts import MessagesPlaceholder
 from langchain.memory import ConversationSummaryBufferMemory
+from memory import save_user_input
 from agent_functions.functions import ExtractTillInformationTool, ExtractQrCodeInformationTool
 from agent_tools.Browsing.tools import SearchTool
 from agent_tools.Mpesa.till.tools import PaymentTillTool
 from agent_tools.Mpesa.paybill.tools import PaymentPaybillTool
 from agent_tools.Mpesa.qr_code.tools import QrCodeTool
+
 from whatsapp_configuration.config import Config
 
 load_dotenv()
+
 
 class AIBot:
     def __init__(self):
@@ -45,7 +49,8 @@ Remember to keep you responses as short as possible.
 """)
         self.memory = ConversationSummaryBufferMemory(memory_key="memory", return_messages=True, llm=self.llm, max_token_limit=10000)
         self.agent = self.initialize_agent()
-
+    
+    
     def initialize_agent(self):
         tools = [
             ExtractTillInformationTool(),
@@ -71,6 +76,7 @@ Remember to keep you responses as short as possible.
         return agent
 
     def handle_message(self, message):
+        save_user_input(message)
         if message.lower() == "end":
             return "Have a good day!"
 

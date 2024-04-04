@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field
 from typing import Optional
 from langchain.tools import BaseTool
 from pydantic import BaseModel, Field
+import base64
 from agent_tools.Mpesa.acess_token.tools import get_access_token, AccessTokenOutput
 
 load_dotenv()
@@ -34,7 +35,15 @@ def generate_dynamic_qr(data):
         }
         dynamic_qr_url = 'https://sandbox.safaricom.co.ke/mpesa/qrcode/v1/generate'
         response = requests.post(dynamic_qr_url, json=data, headers=headers)
-        return response.json()
+        # Check if the request was successful
+        if response.status_code == 200:
+            # Encode the image data as base64
+            image_data = base64.b64encode(response.content).decode('utf-8')
+            # Return the base64 encoded image data
+            return image_data
+        else:
+            # Handle the error
+            return f"Failed to generate QR code: {response.status_code}"
     else:
         return access_token_response
 
@@ -45,4 +54,5 @@ class QrCodeTool(BaseTool):
     result_schema = QrCodeOutput
 
     def _run(self, data: QrCodeInput):
-        return generate_dynamic_qr(data)
+        image_data = generate_dynamic_qr(data)
+        return image_data

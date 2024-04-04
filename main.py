@@ -1,9 +1,8 @@
 from flask import Flask
 import logging
 
-from views import webhook_blueprint
-from config import Config
-# from ai_bot_2 import AIBot
+from whatsapp_configuration.views import webhook_blueprint
+from whatsapp_configuration.config import Config
 from ai_bot_langchain import AIBot
 
 
@@ -22,16 +21,8 @@ def create_app():
     return app
 
 
-
 if __name__ == '__main__':
     app = create_app()
     
     logging.info('Flask app started')
-    app.run(host='0.0.0.0', port=5000)
-    
-    
-#running app:
-#1) python3 main.py
-#2) ngrok http 5000 --domain=light-goat-driving.ngrok-free.app  (expose to the web using ngrok)
-
-    
+    app.run(host='0.0.0.0', port=5000)   

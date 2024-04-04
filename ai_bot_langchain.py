@@ -7,11 +7,10 @@ from langchain.prompts import MessagesPlaceholder
 from langchain.memory import ConversationSummaryBufferMemory
 from agent_functions.functions import ExtractTillInformationTool, ExtractQrCodeInformationTool
 from agent_tools.Browsing.tools import SearchTool
-# from agent_tools.Apify.tools import CrawlWebsiteTool
 from agent_tools.Mpesa.till.tools import PaymentTillTool
 from agent_tools.Mpesa.paybill.tools import PaymentPaybillTool
 from agent_tools.Mpesa.qr_code.tools import QrCodeTool
-from config import Config
+from whatsapp_configuration.config import Config
 
 load_dotenv()
 
@@ -47,7 +46,6 @@ Remember to keep you responses as short as possible.
             ExtractQrCodeInformationTool(),
             QrCodeTool(),
             SearchTool(),
-            # CrawlWebsiteTool(),
         ]
         agent_kwargs = {
             "extra_prompt_message": [MessagesPlaceholder(variable_name="memory")],

@@ -4,8 +4,7 @@ import logging
 import hashlib
 import hmac
 
-from config import Config
-
+from whatsapp_configuration.config import Config
 
 
 def validate_signature(payload, signature):

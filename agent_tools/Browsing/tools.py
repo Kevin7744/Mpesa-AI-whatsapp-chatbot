@@ -1,5 +1,3 @@
-# functions.py
-
 from pydantic import BaseModel, Field
 from langchain.tools import BaseTool
 from langchain.agents import Tool

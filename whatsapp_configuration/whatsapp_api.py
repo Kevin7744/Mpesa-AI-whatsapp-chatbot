@@ -1,7 +1,7 @@
 import json
 import requests
 import logging
-from config import Config
+from whatsapp_configuration.config import Config
 from flask import current_app as app
 
 

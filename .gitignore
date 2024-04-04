@@ -36,6 +36,7 @@ bld/
 config.py
 test_whatsapps.py
 .env
+usage.txt
 
 
 

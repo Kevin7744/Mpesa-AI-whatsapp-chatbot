@@ -4,9 +4,9 @@ from flask import Blueprint, request, jsonify
 import logging
 import json 
 
-from config import Config
-from security import signature_required
-from whatsapp_api import (
+from whatsapp_configuration.config import Config
+from whatsapp_configuration.security import signature_required
+from whatsapp_configuration.whatsapp_api import (
     is_valid_whatsapp_message, 
     process_whatsapp_message
 )

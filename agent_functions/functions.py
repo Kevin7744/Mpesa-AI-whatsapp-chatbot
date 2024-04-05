@@ -13,16 +13,14 @@ def extract_till_information(user_input: str):
     The user input suggests a transaction. Your goal is to identify and extract key information needed for the payment:
     1. The amount the user wants to send.
     2. The account number or till number the user wants to send to.
-    3. The phone number of the user making the payment.
-    4. Determine whether it's a till payment or a paybill payment.
-    5. If it's a till payment, set the default value for account_reference to "Till".
+    3. Determine whether it's a till payment or a paybill payment.
+    4. If it's a till payment, set the default value for account_reference to "Till".
 
     Example:
     - User input: "send 1000 to 174379"
       Extracted Information:
         - amount: 1000
         - business_short_code: 174379
-        - party_a: [phone number extracted from user input, always add "+" to the start if numbers starts with 254 else add "+254" if number starts with 07.]
         - transaction_type: CustomerBuyGoodsOnline
         - account_reference: Till [default value for CustomerBuyGoodsOnline transactions]
 
@@ -30,7 +28,6 @@ def extract_till_information(user_input: str):
       Extracted Information:
         - amount: 1000
         - business_short_code: 174379
-        - party_a: [phone number extracted from user input]
         - transaction_type: CustomerPayBillOnline
         - account_reference: SAFARI
     """
@@ -52,8 +49,8 @@ class ExtractTillInformationInput(BaseModel):
     user_input: str = Field(description="the user input")
 
 class ExtractTillInformationTool(BaseTool):
-    name = "extract_information"
-    description = "use this to extract key information from user input and return result. Can only be amount and Till number or account number IN INTEGER TYPE"
+    name = "extract_till_information"
+    description = "use this to extract key till payment information from user input and return result. Can only be amount and Till number or account number IN INTEGER TYPE"
     args_schema: Type[BaseModel] = ExtractTillInformationInput
 
     def _run(self, user_input: str):
@@ -61,21 +58,6 @@ class ExtractTillInformationTool(BaseTool):
 
     def _arun(self, url: str):
         raise NotImplementedError("Get_stock_performance does not support async")
-
-class ExtractTillInformationInput(BaseModel):
-    user_input: str = Field(description="the user input")
-
-class ExtractTillInformationTool(BaseTool):
-    name = "extract_information"
-    description = "use this to extract key information from user input and return result. Can only be amount and Till number or account number IN INTEGER TYPE"
-    args_schema: Type[BaseModel] = ExtractTillInformationInput
-
-    def _run(self, user_input: str):
-        return extract_till_information(user_input)
-
-    def _arun(self, url: str):
-        raise NotImplementedError("Get_stock_performance does not support async") 
-
 
 def extract_qr_code_information(user_input: str):
     prompt = f"""

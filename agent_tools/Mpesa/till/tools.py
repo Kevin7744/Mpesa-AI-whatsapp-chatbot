@@ -7,6 +7,7 @@ from typing import Optional, Type
 from langchain.tools import BaseTool
 from pydantic import BaseModel, Field
 from agent_tools.Mpesa.acess_token.tools import get_access_token, AccessTokenOutput
+import os
 
 load_dotenv()
 
@@ -14,7 +15,6 @@ load_dotenv()
 class PaymentTillInput(BaseModel):
     amount: float = Field(description="The amount to be paid")
     business_short_code: str = Field(description="The till number to be paid to")
-    party_a: str = Field(description="The phone number sending money")
     transaction_type: str = Field(description="Uses 'CustomerBuyGoodsOnline' as transaction_type.")
     account_reference: str = Field(description="Account reference for the transaction")
 
@@ -23,7 +23,7 @@ class PaymentTillOutput(BaseModel):
     response_code: Optional[str] = Field(description="Response code from the initiate payment push request")
     error_message: Optional[str] = Field(description="Error message in case of failure")
 
-def initiate_till_payment(amount: float, business_short_code: str, party_a: float, transaction_type: str):
+def initiate_till_payment(amount: float, business_short_code: str, transaction_type: str):
     access_token_response = get_access_token()
 
     if isinstance(access_token_response, AccessTokenOutput):
@@ -36,6 +36,7 @@ def initiate_till_payment(amount: float, business_short_code: str, party_a: floa
             password = base64.b64encode((str(business_short_code) + passkey + timestamp).encode()).decode()
             party_b = business_short_code
             transaction_desc = 'PaymentTill'
+            party_a = '254719321423'
 
             stk_push_headers = {
                 'Content-Type': 'application/json',
@@ -79,5 +80,5 @@ class PaymentTillTool(BaseTool):
     description = "Use this to initiate a till payment: takes in amount, phone_number amd till/account number as parameters"
     args_schema: Type[BaseModel] = PaymentTillInput
 
-    def _run(self, amount: float, business_short_code: str, party_a: float, transaction_type: str, account_reference: str):
-        return initiate_till_payment(amount, business_short_code, party_a, transaction_type, account_reference)
+    def _run(self, amount: float, business_short_code: str, transaction_type: str, account_reference: str):
+        return initiate_till_payment(amount, business_short_code, transaction_type, account_reference)

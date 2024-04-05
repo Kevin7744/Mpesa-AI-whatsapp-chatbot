@@ -6,7 +6,7 @@ from langchain_openai import ChatOpenAI
 from langchain.schema import SystemMessage
 from langchain.prompts import MessagesPlaceholder
 from langchain.memory import ConversationSummaryBufferMemory
-from memory import save_user_input
+# from memory import save_user_input
 from agent_functions.functions import ExtractTillInformationTool, ExtractQrCodeInformationTool
 from agent_tools.Browsing.tools import SearchTool
 from agent_tools.Mpesa.till.tools import PaymentTillTool
@@ -76,7 +76,7 @@ Remember to keep you responses as short as possible.
         return agent
 
     def handle_message(self, message):
-        save_user_input(message)
+        # save_user_input(message)
         if message.lower() == "end":
             return "Have a good day!"
 

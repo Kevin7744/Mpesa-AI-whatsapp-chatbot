@@ -14,7 +14,6 @@ load_dotenv()
 class PaymentPaybillInput(BaseModel):
     amount: float = Field(description="The amount to be paid to the paybill account number")
     business_short_code: str = Field(description="The account number to be paid to")
-    party_a: str = Field(description="The phone number sending money")
     transaction_type: str = Field(description=" Uses 'CustomerPayBillOnline' as transaction type.")
     account_reference: str = Field(description="Account reference for the transaction")
 
@@ -23,7 +22,7 @@ class PaymentPaybillOutput(BaseModel):
     response_code: Optional[str] = Field(description="Response code from the initiate payment push request")
     error_message: Optional[str] = Field(description="Error message in case of failure")
 
-def initiate_paybill_payment(amount: float, business_short_code: str, party_a: float, transaction_type: str, account_reference: str):
+def initiate_paybill_payment(amount: float, business_short_code: str, transaction_type: str, account_reference: str):
     access_token_response = get_access_token()
 
     if isinstance(access_token_response, AccessTokenOutput):
@@ -36,6 +35,7 @@ def initiate_paybill_payment(amount: float, business_short_code: str, party_a: f
             password = base64.b64encode((str(business_short_code) + passkey + timestamp).encode()).decode()
             party_b = business_short_code
             transaction_desc = 'PaymentTill test'
+            party_a = '254719321423'
 
             stk_push_headers = {
                 'Content-Type': 'application/json',
@@ -79,6 +79,6 @@ class PaymentPaybillTool(BaseTool):
     description = "Use this to initiate a paybill payment: takes ,phone_number, amount, account number/business_short_code and account reference as parameters"
     args_schema: Type[BaseModel] = PaymentPaybillInput
 
-    def _run(self, amount: float, business_short_code: str, party_a: float, transaction_type: str, account_reference: str):
-        return initiate_paybill_payment(amount, business_short_code, party_a, transaction_type, account_reference)
+    def _run(self, amount: float, business_short_code: str, transaction_type: str, account_reference: str):
+        return initiate_paybill_payment(amount, business_short_code, transaction_type, account_reference)
     

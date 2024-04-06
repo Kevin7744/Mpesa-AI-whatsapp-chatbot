@@ -1,5 +1,10 @@
 ## Mpesa-AI-WhatsApp-Chatbot
 
+
+https://github.com/Kevin7744/Mpesa-AI-whatsapp-chatbot/assets/105924200/ee33b4ac-3d5c-403e-b3f4-2e910bc4e749
+
+
+
 The Mpesa-AI-WhatsApp-Chatbot is an innovative project that combines the power of OpenAI's language model and [LangChain's](https://python.langchain.com/docs/get_started/introduction/) capabilities to facilitate payments using the [MPESA-Daraja API](https://developer.safaricom.co.ke/). This chatbot aims to streamline the payment process by enabling users to interact with it through WhatsApp, making transactions more convenient and efficient.
 
 ### Usage

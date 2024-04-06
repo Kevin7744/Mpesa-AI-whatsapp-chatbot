@@ -1,0 +1,9 @@
+langchain
+pydantic
+python-dotenv
+openai
+langchain-openai
+langchain-community
+faiss
+Flask
+requests
